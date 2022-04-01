@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GetCalc</title>
+</head>
+<body>
+    <form action="getCalc.php" method="get">
+        <div>
+            <label for="firstNum">First number: </label>
+            <input type="number" name="firstNum" id="firstNum">
+        </div>
+        <div>
+            <label for="secondNum">Second number: </label>
+            <input type="number" name="secondNum" id="secondNum">
+        </div>
+        <div>
+            <p>Choose an operation to perform: </p>
+            <div>
+                <label for="adding">Adding</label>
+                <input type="radio" name="mode" id="adding" value="Adding">
+                <label for="subtracting">Subtracting</label>
+                <input type="radio" name="mode" id="subtracting" value="Subtracting">
+                <label for="multiplying">Multiplying</label>
+                <input type="radio" name="mode" id="multiplying" value="Multiplying">
+                <label for="dividing">Dividing</label>
+                <input type="radio" name="mode" id="dividing" value="Dividing">
+            </div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tripAdvisor</title>
+</head>
+<body>
+<form action="tripAdvisor.php" method="post">
+    <div>
+        <label for="date-from">Date from: </label>
+        <input type="date" id="date-from" name="date-from">
+        <label for="date-to">Date to: </label>
+        <input type="date" id="date-to" name="date-to">
+    </div>
+    <div>
+        <label for="people">How many people? </label>
+        <input type="number" name="people" id="people">
+    </div>
+    <div>
+        <label for="country">Choose Your destination:</label>
+        <select name="country" id="country">
+            <option name="Poland" value="Poland">Poland</option>
+            <option name="Germany" value="Germany">Germany</option>
+            <option name="USA" value="USA">USA</option>
+            <option name="France" value="France">France</option>
+            <option name="Norway" value="Norway">Norway</option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" name="submit" value="submit">
+    </div>
+</form>
+</body>
+</html>
