@@ -3,8 +3,6 @@ $site1 = ['name' => 'Strona główna', 'link' => 'mainsite', 'content' => 'This 
 $site2 = ['name' => 'Strona druga', 'link' => 'secondsite', 'content' => 'This is a secondary site'];
 $site3 = ['name' => 'Strona trzecia', 'link' => 'thirdsite', 'content' => 'This is a 3 site'];
 $sitesList = [$site1, $site2, $site3];
-$pageLink = $_GET['link'];
-$siteArr = 0;
 ?>
 
 <!DOCTYPE html>
@@ -15,21 +13,19 @@ $siteArr = 0;
 </head>
 <body>
     <?php
-        if(isset($pageName)){
+        if(isset($_GET['link'])){
             foreach($sitesList as $sites){
-                if($sites['link'] == $pageLink){?>
-                    <h1><?php $sites['name']; ?></h1><br/>
-                    <?php $siteArr = key($sites);
+                if($sites['link'] == $_GET['link']){
+                    echo "<h1>".$sites['name']."</h1><br/>";
+                    $siteArr = array_search($sites['name'], array_column($sitesList, 'name'));
                 }
             }
         }
-        foreach($sitesList as $sites){?>
-            <a href="MyFirstSite.php?link=<?php $sites['link']; ?>"><?php $sites['name']; ?></a><br/>
-                <?php $siteArr = key($sites);
+        foreach($sitesList as $sites){
+            echo "<a href='MyFirstSite.php?link=".$sites['link']."'>".$sites['name']."</a><br/>";
             }
-        if(isset($pageName)){ ?>
-            <p><?php $sitesList[$siteArr]['content']; ?><p/>
-            <?php
+        if(isset($_GET['link'])){
+            echo "<p>".$sitesList[$siteArr]['content']."<p/>";
         }
 
     ?>
