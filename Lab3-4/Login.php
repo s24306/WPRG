@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION['logged'])){
+if(isset($_SESSION['in_use'])){
     header("Location: AdminPage.php");
 }
 ?>
