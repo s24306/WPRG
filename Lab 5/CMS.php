@@ -1,5 +1,5 @@
 <?php
-
+include "MyFirstSiteCMS.php";
 ?>
 
 <!DOCTYPE html>
@@ -14,25 +14,35 @@
     <div>
         <h3>Main site</h3>
         <label for="MainSiteName">Main site name</label><br>
-        <input type="text" name="MainSiteName" id="MainSiteName"><br>
+        <input type="text" name="MainSiteName" id="MainSiteName" value='<?php echo $sitesList[0][0]; ?>'><br>
         <label for="MainSiteContent">Main site content</label><br>
-        <textarea name="MainSiteContent" id="MainSiteContent" rows="10" cols="40"></textarea>
+        <input name="MainSiteContent" id="MainSiteContent" value='<?php
+        echo $sitesList[0][2]
+        ?>'>
     </div>
 
     <div>
         <h3>Second site</h3>
         <label for="SecondSiteName">Second site name</label><br>
-        <input type="text" name="SecondSiteName" id="SSecondSiteName"><br>
+        <input type="text" name="SecondSiteName" id="SSecondSiteName" value='<?php
+        echo $sitesList[1][0]
+        ?>'><br>
         <label for="SecondSiteContent">Second site content</label><br>
-        <textarea name="SecondSiteContent" id="SecondSiteContent" rows="10" cols="40"></textarea>
+        <input name="SecondSiteContent" id="SecondSiteContent" value='<?php
+        echo $sitesList[1][2]
+        ?>'>
     </div>
 
     <div>
         <h3>Third site</h3>
         <label for="ThirdSiteName">Third site name</label><br>
-        <input type="text" name="ThirdSiteName" id="ThirdSiteName"><br>
+        <input type="text" name="ThirdSiteName" id="ThirdSiteName" value='<?php
+        echo $sitesList[2][0]
+        ?>'><br>
         <label for="ThirdSiteContent">Third site content</label><br>
-        <textarea name="ThirdSiteContent" id="ThirdSiteContent" rows="10" cols="40"></textarea>
+        <input name="ThirdSiteContent" id="ThirdSiteContent" value='<?php
+        echo $sitesList[2][2]
+        ?>'>
     </div><br>
 
     <div>
