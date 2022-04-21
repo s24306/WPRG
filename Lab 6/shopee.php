@@ -1,10 +1,13 @@
 <?php
 session_start();
+include "shopeeFunctions.php";
+
+
 if(!isset($_SESSION['cart'])){
-    $_SESSION['cart'] = array();
+    $_SESSION['cart'] = [];
 }
-if(isset($_SESSION['cart'])){
-    array_push($_SESSION['cart'], $_POST['product']);
+if(isset($_SESSION['cart']) && isset($_POST['product']) && isset($_POST['price'])){
+    addItemToCart($_POST['product'], $_POST['price']);
 }
 
 $products = [];
@@ -31,10 +34,12 @@ while (($line = fgetcsv($f)) !== FALSE) {
               <div>
                 <p>".$product[0]." - Available: ".$product[1].", Price: ".$product[2]."PLN"."</p>
                 <input type='hidden' name='product' value=".$product[0].">
-                <button type='submit' value=".$product[0].">Add to cart</button>
+                <input type='hidden' name='price' value=".$product[2].">
+                <button type='submit'>Add to cart</button>
               </div><br/>
               </form>";
     }
     ?>
+<a href="cart.php">Go to your cart</a>
 </body>
 </html>
