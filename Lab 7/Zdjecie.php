@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>2 JP2 Najlepszy</title>
+    <title>Papież na dziś</title>
 </head>
 <body>
 
@@ -57,10 +57,15 @@ if($imgid > 0) {
     </div>
     <div id="nawigacja" style="text-align:center">
         <?php
-        echo "<a href='Zdjecie.php?imgid=$first'>Pierwszy</a> ";
-        echo "<a href='Zdjecie.php?imgid=$prev'>Poprzedni</a> ";
-        echo "<a href='Zdjecie.php?imgid=$next'>Następny</a> ";
-        echo "<a href='Zdjecie.php?imgid=$last'>Ostatni</a><br> ";
+        if ($imgid > 1){
+            echo "<a href='Zdjecie.php?imgid=$first'>Pierwszy</a> ";
+            echo "<a href='Zdjecie.php?imgid=$prev'>Poprzedni</a> ";
+        }
+        if ($imgid < $count){
+            echo "<a href='Zdjecie.php?imgid=$next'>Następny</a> ";
+            echo "<a href='Zdjecie.php?imgid=$last'>Ostatni</a><br> ";
+        }
+        echo "<br>";
         echo "<button onclick=location.href='index.php'>Powrót do galerii</button> ";
         ?>
     </div>

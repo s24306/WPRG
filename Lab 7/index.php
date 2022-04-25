@@ -1,11 +1,40 @@
 <?php
 include 'functions.php';
+
 $imgDir = "./imgGallery";
+
 $dir = scandir($imgDir);
 array_shift($dir);
 array_shift($dir);
 usort($dir, cmp());
-$imgid = 0;
+
+$count = count($dir);
+$numOfPages = ceil($count/4);
+
+if(isset($_GET['pageNum']) && $_GET['pageNum'] <= $numOfPages && $_GET['pageNum'] >= 1){
+    $pageNum = (int) $_GET['pageNum'];
+} else if($_GET['pageNum'] > $numOfPages || $_GET['pageNum'] < 1 || !isset($_GET['pageNum'])) {
+    $pageNum = 1;
+}
+
+$photoIndexArr = [];
+$photosRange = $pageNum * 4;
+if($photosRange > $count){
+    $photosRange -= $count;
+    for($i = 0; $i < $photosRange; $i++){
+        array_push($photoIndexArr, --$count);
+    }
+} else {
+    for ($i = 0; $i < 4; $i++){
+        if($photosRange == 0){
+            break;
+        } else {
+            array_push($photoIndexArr, --$photosRange);
+        }
+    }
+}
+
+natsort($photoIndexArr);
 
 ?>
 
@@ -20,12 +49,18 @@ $imgid = 0;
 </head>
 <body>
     <?php
-    foreach ($dir as $d){
-        $imgName = $dir["$imgid"];
-        echo "<a href='Zdjecie.php?imgid=$imgid'>
+    foreach ($photoIndexArr as $index){
+        $imgName = $dir["$index"];
+        echo "<a href='Zdjecie.php?imgid=$index'>
                 <img src=\"$imgDir/$imgName\" alt=\"$imgName\" style='height: 200px; width: 200px'/>
                 </a>";
-        $imgid++;
+    }
+    echo "<br>";
+    if($pageNum > 1){
+        echo "<a href='index.php?pageNum=".($pageNum-1)."'>Poprzednia strona</a> ";
+    }
+    if ($pageNum < $numOfPages ){
+        echo "<a href='index.php?pageNum=".($pageNum+1)."'>Następna strona</a> ";
     }
     ?>
 </body>
