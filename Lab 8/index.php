@@ -1,12 +1,21 @@
 <?php
-include 'functions.php';
+spl_autoload_register(function ($Car) {
+    include $Car . '.php';
+});
 
 $imgDir = "./imgGallery";
 
 $dir = scandir($imgDir);
 array_shift($dir);
 array_shift($dir);
-usort($dir, cmp());
+
+$cars = [];
+$f = fopen("./cars.csv", "r");
+while (($line = fgetcsv($f)) !== FALSE) {
+    $car = Car($line[0], $line[1], $line[2], $line[3], $line[4], $line[5], $imgDir."/".$line[0]);
+    array_push($cars, $car);
+}
+var_dump($cars);
 
 ?>
 
@@ -21,19 +30,13 @@ usort($dir, cmp());
 </head>
 <body>
 <?php
-foreach ($photoIndexArr as $index){
-    $imgName = $dir["$index"];
-    echo "<a href='Zdjecie.php?imgid=$index'>
-                <img src=\"$imgDir/$imgName\" alt=\"$imgName\" style='height: 200px; width: 200px'/>
-                </a>";
+foreach ($dir as $index=>$value){
+    $index += 1;
+    echo "<a href='car.php?imgid=$index'>
+                <img src=\"$imgDir/$index\" alt=\"$index\" style='height: 200px; width: 200px'/>
+                </a><br>";
 }
 echo "<br>";
-if($pageNum > 1){
-    echo "<a href='index.php?pageNum=".($pageNum-1)."'>Poprzednia strona</a> ";
-}
-if ($pageNum < $numOfPages ){
-    echo "<a href='index.php?pageNum=".($pageNum+1)."'>Następna strona</a> ";
-}
 ?>
 </body>
 </html>

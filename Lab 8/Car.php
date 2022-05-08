@@ -3,7 +3,7 @@
 class Car{
     private $id, $make, $model, $year, $price, $capacity, $photoLink;
 
-    function _construct($id,$make, $model, $year, $price, $capacity, $photoLink){
+    public function __construct($id,$make, $model, $year, $price, $capacity, $photoLink){
         $this->id = $id;
         $this->make = $make;
         $this->model = $model;

@@ -10,60 +10,57 @@
 <body>
 
 <?php
-include 'functions.php';
 $imgDir = "./imgGallery";
 
 if(isset($_GET['imgid'])){
     $imgid = $_GET['imgid'];
 } else {
-    $imgid = 0;
+    $imgid = 1;
 }
 
 $dir = scandir($imgDir);
 array_shift($dir);
 array_shift($dir);
-usort($dir, cmp());
 $count = count($dir);
 
-if ($imgid < 0 || $imgid >= $count || !is_Numeric($imgid)) {
-    $imgid = 0;
+if ($imgid < 1 || $imgid - 1 >= $count || !is_Numeric($imgid)) {
+    $imgid = 1;
 }
 
-$imgName = $dir["$imgid"];
-$first = 0;
-$last = $count - 1;
-if($imgid < $count - 1) {
-    $next = $imgid + 1;
+$imgName = $dir[$imgid-1];
+$first = 1;
+$last = $count;
+if($imgid < $count) {
+    $next = $imgid+1;
 } else {
-    $next = $count - 1;
+    $next = $imgid;
 }
-if($imgid > 0) {
-    $prev = $imgid - 1;
+if($imgid > 1) {
+    $prev = $imgid-1;
 } else {
-    $prev = 0;
+    $prev = $imgid;
 }
 ?>
 <div>
     <div id="obraz" style="text-align:center">
         <?php
-        echo "<img src=\"$imgDir/$imgName\" alt=\"$imgName\" />";
+        echo "<img src=\"$imgDir/$imgid\" alt=\"$imgName\" />";
         ?>
     </div>
     <div id="opis" style="text-align:center">
         <?php
-        $imgid++;
         echo "Obraz $imgName ($imgid z $count)";
         ?>
     </div>
     <div id="nawigacja" style="text-align:center">
         <?php
         if ($imgid > 1){
-            echo "<a href='Zdjecie.php?imgid=$first'>Pierwszy</a> ";
-            echo "<a href='Zdjecie.php?imgid=$prev'>Poprzedni</a> ";
+            echo "<a href='car.php?imgid=$first'>Pierwszy</a> ";
+            echo "<a href='car.php?imgid=$prev'>Poprzedni</a> ";
         }
         if ($imgid < $count){
-            echo "<a href='Zdjecie.php?imgid=$next'>Następny</a> ";
-            echo "<a href='Zdjecie.php?imgid=$last'>Ostatni</a><br> ";
+            echo "<a href='car.php?imgid=$next'>Następny</a> ";
+            echo "<a href='car.php?imgid=$last'>Ostatni</a><br> ";
         }
         echo "<br>";
         echo "<button onclick=location.href='index.php'>Powrót do galerii</button> ";
