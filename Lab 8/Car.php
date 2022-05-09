@@ -24,7 +24,7 @@ class Car{
     /**
      * @param mixed $id
      */
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -40,7 +40,7 @@ class Car{
     /**
      * @param mixed $capacity
      */
-    public function setCapacity($capacity): void
+    public function setCapacity($capacity)
     {
         $this->capacity = $capacity;
     }
@@ -56,7 +56,7 @@ class Car{
     /**
      * @param mixed $make
      */
-    public function setMake($make): void
+    public function setMake($make)
     {
         $this->make = $make;
     }
@@ -72,7 +72,7 @@ class Car{
     /**
      * @param mixed $model
      */
-    public function setModel($model): void
+    public function setModel($model)
     {
         $this->model = $model;
     }
@@ -88,7 +88,7 @@ class Car{
     /**
      * @param mixed $photoLink
      */
-    public function setPhotoLink($photoLink): void
+    public function setPhotoLink($photoLink)
     {
         $this->photoLink = $photoLink;
     }
@@ -104,7 +104,7 @@ class Car{
     /**
      * @param mixed $price
      */
-    public function setPrice($price): void
+    public function setPrice($price)
     {
         $this->price = $price;
     }
@@ -120,7 +120,7 @@ class Car{
     /**
      * @param mixed $year
      */
-    public function setYear($year): void
+    public function setYear($year)
     {
         $this->year = $year;
     }

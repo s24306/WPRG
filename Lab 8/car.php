@@ -1,6 +1,28 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <style>
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+            width:100px;
+        }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -10,59 +32,46 @@
 <body>
 
 <?php
-$imgDir = "./imgGallery";
+include "Car.php";
+session_start();
 
-if(isset($_GET['imgid'])){
-    $imgid = $_GET['imgid'];
-} else {
-    $imgid = 1;
+if(!isset($_SESSION['cars'])){
+    header("Location: index.php");
 }
 
-$dir = scandir($imgDir);
-array_shift($dir);
-array_shift($dir);
-$count = count($dir);
+$car = $_SESSION['cars'][$_GET["imgid"] - 1];
 
-if ($imgid < 1 || $imgid - 1 >= $count || !is_Numeric($imgid)) {
-    $imgid = 1;
-}
-
-$imgName = $dir[$imgid-1];
-$first = 1;
-$last = $count;
-if($imgid < $count) {
-    $next = $imgid+1;
-} else {
-    $next = $imgid;
-}
-if($imgid > 1) {
-    $prev = $imgid-1;
-} else {
-    $prev = $imgid;
-}
 ?>
 <div>
     <div id="obraz" style="text-align:center">
         <?php
-        echo "<img src=\"$imgDir/$imgid\" alt=\"$imgName\" />";
+        echo "<img src=".$car->getPhotoLink()." alt=".$car->getId()." />";
         ?>
     </div>
-    <div id="opis" style="text-align:center">
-        <?php
-        echo "Obraz $imgName ($imgid z $count)";
-        ?>
-    </div>
+    <table class="center">
+        <tr>
+            <th>Marka</th>
+            <td><?php echo $car->getMake();?></td>
+        </tr>
+        <tr>
+            <th>Model</th>
+            <td><?php echo $car->getModel();?></td>
+        </tr>
+        <tr>
+            <th>Rok produkcji</th>
+            <td><?php echo $car->getYear(); ?></td>
+        </tr>
+        <tr>
+            <th>Cena</th>
+            <td><?php echo $car->getPrice(); ?>PLN</td>
+        </tr>
+        <tr>
+            <th>Pojemność silnika</th>
+            <td><?php echo $car->getCapacity(); ?></td>
+        </tr>
+    </table>
     <div id="nawigacja" style="text-align:center">
         <?php
-        if ($imgid > 1){
-            echo "<a href='car.php?imgid=$first'>Pierwszy</a> ";
-            echo "<a href='car.php?imgid=$prev'>Poprzedni</a> ";
-        }
-        if ($imgid < $count){
-            echo "<a href='car.php?imgid=$next'>Następny</a> ";
-            echo "<a href='car.php?imgid=$last'>Ostatni</a><br> ";
-        }
-        echo "<br>";
         echo "<button onclick=location.href='index.php'>Powrót do galerii</button> ";
         ?>
     </div>

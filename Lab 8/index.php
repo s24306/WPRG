@@ -1,7 +1,7 @@
 <?php
-spl_autoload_register(function ($Car) {
-    include $Car . '.php';
-});
+
+require "Car.php";
+session_start();
 
 $imgDir = "./imgGallery";
 
@@ -12,10 +12,10 @@ array_shift($dir);
 $cars = [];
 $f = fopen("./cars.csv", "r");
 while (($line = fgetcsv($f)) !== FALSE) {
-    $car = Car($line[0], $line[1], $line[2], $line[3], $line[4], $line[5], $imgDir."/".$line[0]);
+    $car = new Car($line[0], $line[1], $line[2], $line[3], $line[4], $line[5], $imgDir."/".$line[0]);
     array_push($cars, $car);
 }
-var_dump($cars);
+$_SESSION['cars'] = $cars;
 
 ?>
 
@@ -30,10 +30,9 @@ var_dump($cars);
 </head>
 <body>
 <?php
-foreach ($dir as $index=>$value){
-    $index += 1;
-    echo "<a href='car.php?imgid=$index'>
-                <img src=\"$imgDir/$index\" alt=\"$index\" style='height: 200px; width: 200px'/>
+foreach ($cars as $car){
+    echo "<a href='car.php?imgid=".$car->getid()."'>
+                <img src=\"$imgDir/".$car->getid()."\" alt=\"".$car->getid()."\" style='height: 200px; width: 200px'/>
                 </a><br>";
 }
 echo "<br>";
