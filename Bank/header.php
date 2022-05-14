@@ -8,12 +8,50 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+
+        .navBar{
+            display: inline;
+            float:right;
+            margin-right: 1em;
+        }
+    </style>
     <title>The Bill Bank</title>
 </head>
 <body>
 <div>
-    <a href="index.php">Main site</a>
-    <a href="login.php">Login</a>
-    <a href="about.php">About us</a>
-    <a href="loan.php">Take a loan</a>
+    <a class="navBar" href="aboutUs.php">About Us </a>
+    <a class="navBar" href="ontactUs.php"> Contact Us</a>
 </div><br>
+<div>
+    <ul>
+        <li><a href="index.php">Home</a></li>
+        <li style="float:right"><a href="login.php">Login</a></li>
+        <li style="float:right"><a href="accountCreation.php">Create an account</a></li>
+        <li style="float:right"><a href="loan.php">Take a loan</a></li>
+    </ul>
+</div>
+<br>
