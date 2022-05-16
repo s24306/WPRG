@@ -1,5 +1,6 @@
 <?php
-include 'header.php'
+session_start();
+include 'header.php';
 ?>
 
 <!doctype html>
@@ -12,19 +13,41 @@ include 'header.php'
     <title>Create new account</title>
 </head>
 <body>
-    <form>
+    <a style="color: red"><?php
+        if(isset($_SESSION['isDataValid']) && !$_SESSION['isDataValid']){
+            echo $_SESSION['wrongValidationMessage'];
+        }
+        ?></a>
+    <form method="post" action="validateAccountCreationData.php">
         <div>
             <label for="name">Name</label><br>
-            <input type="text" id="name" name="name"><br>
+            <input type="text" id="name" name="name" placeholder="Paweł" required><br>
         </div>
         <div>
             <label for="surname">Surname</label><br>
-            <input type="text" id="surname" name="surname"><br>
+            <input type="text" id="surname" name="surname" placeholder="Pisarski" required><br>
         </div>
         <div>
             <label for="pesel">PESEL</label><br>
-            <input type="text" id="pesel" name="pesel"><br>
+            <input type="text" id="pesel" name="pesel" placeholder="69694201234"><br>
         </div>
+        <div>
+            <input type="text" name="dob" placeholder="Date of Birth" onfocus="(this.type='date')" required />
+        </div>
+        <div>
+            <select name ="accountType" required >
+                <option class="default" value="" disabled selected>Account Type</option>
+                <option value="Saving">Saving</option>
+                <option value="Current">Current</option>
+            </select>
+        </div>
+        <div>
+            <select name ="currency" required >
+                <option class="default" value="" disabled selected>Currency</option>
+                <option value="PLN">PLN</option>
+            </select>
+        </div>
+        <input type="submit" name="submit" value="Submit">
     </form>
 </body>
 </html>
