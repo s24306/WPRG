@@ -1,9 +1,9 @@
 <?php
 
 class Electric extends Pokemon{
-    public array $strengths;
-    public array $weaknesses;
-    public string $cardColor;
+    public $strengths;
+    public $weaknesses;
+    public $cardColor;
 
     public function __construct($name, $type, $hp_max, $strength, $photo){
         parent::__construct($name, $type, $hp_max, $strength, $photo);
@@ -13,8 +13,10 @@ class Electric extends Pokemon{
     }
     public function specialEffect(Pokemon $targetPokemon){
         if (rollTheDice()) {
-            echo "$this->name użył paraliżu na $this->get_nazwa()<br/>";
-            $targetPokemon->set_paralyze(True);
-        }else return false;
+            echo $this->getName()." użył paraliżu na ".$targetPokemon->getName()."<br/>";
+            $targetPokemon->setParalyzed(True);
+        }else {
+            return false;
+        }
     }
 }

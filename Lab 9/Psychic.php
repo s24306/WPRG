@@ -1,9 +1,9 @@
 <?php
 
 class Psychic extends Pokemon{
-    public array $strengths;
-    public array $weaknesses;
-    public string $cardColor;
+    public $strengths;
+    public $weaknesses;
+    public $cardColor;
 
     public function __construct($name, $type, $hp_max, $strength, $photo){
         parent::__construct($name, $type, $hp_max, $strength, $photo);
@@ -13,7 +13,10 @@ class Psychic extends Pokemon{
     }
     public function specialEffect(Pokemon $targetPokemon){
         if (rollTheDice()) {
-            $targetPokemon->set_confuse(True);
-        }else return false;
+            echo $this->getName()." ogłuszył ".$targetPokemon->getName()."<br/>";
+            $targetPokemon->setConfused(True);
+        } else {
+            return false;
+        }
     }
 }

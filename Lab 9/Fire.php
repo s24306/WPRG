@@ -1,9 +1,9 @@
 <?php
 
 class Fire extends Pokemon{
-    public array $strengths;
-    public array $weaknesses;
-    public string $cardColor;
+    public $strengths;
+    public $weaknesses;
+    public $cardColor;
 
     public function __construct($name, $type, $hp_max, $strength, $photo){
         parent::__construct($name, $type, $hp_max, $strength, $photo);
