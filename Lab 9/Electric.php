@@ -13,7 +13,7 @@ class Electric extends Pokemon{
     }
     public function specialEffect(Pokemon $targetPokemon){
         if (rollTheDice()) {
-            echo $this->getName()." użył paraliżu na ".$targetPokemon->getName()."<br/>";
+            echo $this->getName()." paralyzed ".$targetPokemon->getName()."<br/>";
             $targetPokemon->setParalyzed(True);
         }else {
             return false;

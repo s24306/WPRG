@@ -10,10 +10,12 @@ class Fight{
     }
     public function go(){
         while ($this->poke1->getHpCurrent() > 0 && $this->poke2->getHpCurrent() > 0) {
-            echo "<div class=\"fight\">";
-            $this->poke1->printCard();
-            $this->poke2->printCard();
+            echo "<ul>";
+            echo "<li><p>".$this->poke1->printCard()."</p></li>
+                  <li><p>".$this->poke2->printCard()."</p></li>
+                  </ul>";
             if($this->poke1->isConfused() || $this->poke1->isParalyzed()){
+                echo $this->poke1->getName()." is unable to move!";
                 $this->poke1->setConfused(False);
                 $this->poke1->setParalyzed(False);
             } else {
@@ -23,6 +25,7 @@ class Fight{
                 break;
             }
             if($this->poke2->isConfused() || $this->poke2->isParalyzed()){
+                echo $this->poke2->getName()."Is unable to move!";
                 $this->poke2->setConfused(False);
                 $this->poke2->setParalyzed(False);
             } else {

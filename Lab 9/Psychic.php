@@ -13,7 +13,7 @@ class Psychic extends Pokemon{
     }
     public function specialEffect(Pokemon $targetPokemon){
         if (rollTheDice()) {
-            echo $this->getName()." ogłuszył ".$targetPokemon->getName()."<br/>";
+            echo $this->getName()." confused ".$targetPokemon->getName()."<br/>";
             $targetPokemon->setConfused(True);
         } else {
             return false;

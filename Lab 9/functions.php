@@ -1,7 +1,7 @@
 <?php
 function rollTheDice(){
-    $number = rand(0,9);
-    if($number % 3) {
+    $number = rand(1,10);
+    if(!($number % 5)) {
         return true;
     } else {
         return false;
