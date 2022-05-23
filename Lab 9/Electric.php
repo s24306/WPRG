@@ -9,7 +9,7 @@ class Electric extends Pokemon{
         parent::__construct($name, $type, $hp_max, $strength, $photo);
         $this->strengths = array('Flying', 'Water');
         $this->weaknesses = array('Ground', 'Grass', 'Electric', 'Dragon');
-        $this->cardColor = '#4592c4';
+        $this->cardColor = '#eed535';
     }
     public function specialEffect(Pokemon $targetPokemon){
         if (rollTheDice()) {

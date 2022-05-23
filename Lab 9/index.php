@@ -12,17 +12,6 @@
             list-style:none;
             margin: auto;
         }
-        /*.nav {*/
-        /*    list-style-type: none;*/
-        /*    text-align: center;*/
-        /*    margin: 0;*/
-        /*    padding: 0;*/
-        /*}*/
-
-        /*.nav li {*/
-        /*    display: inline-block;*/
-        /*    padding: 20px;*/
-        /*}*/
         .container{
             display: inline;
             justify-content: space-between;
@@ -34,7 +23,8 @@
             border-radius: 20px;
         }
         .cardImage{
-            width: 200px;
+            width: 190px;
+            height: 190px;
         }
         .content {
             text-align: center;
@@ -50,7 +40,6 @@
     </style>
 </head>
 <body>
-<!--<div class="container">-->
 <?php
 require "functions.php";
 require "Pokemon.php";
@@ -61,20 +50,19 @@ require "Psychic.php";
 require "Fight.php";
 
 echo "<ul class=\"nav\">";
-    $poke1 = new Fire('Charmander','Fire',30,5,'charmander.png');
-    $poke2 = new Electric('Pikachu','Electric',30,7,'pikachu.png');
-    $poke3 = new Water('Magikarp','Water',20,2,'magikarp.png');
-    $poke4 = new Psychic('Abra','Psychic',50,5,'abra.png');
-    echo "<li><p>".$poke1->printCard()."</p></li>
-    <li><p>".$poke2->printCard()."</p></li>
-    <li><p>".$poke3->printCard()."</p></li>
-    <li><p>".$poke4->printCard()."</p></li>
+    $pokemon1 = new Fire('Charmander','Fire',39,8,'charmander.png');
+    $pokemon2 = new Electric('Voltorb','Electric',40,4,'voltorb2.png');
+    $pokemon3 = new Water('Squirtle','Water',44,6,'squirtle2.png');
+    $pokemon4 = new Psychic('Mewtwo','Psychic',106,4,'mewtwo2.png');
+    echo "<li><p>".$pokemon1->printCard()."</p></li>
+    <li><p>".$pokemon2->printCard()."</p></li>
+    <li><p>".$pokemon3->printCard()."</p></li>
+    <li><p>".$pokemon4->printCard()."</p></li>
 </ul>";
-$fight = new Fight($poke2, $poke4);
+$fight = new Fight($pokemon2, $pokemon4);
+echo"<h1>Fight</h1><br/>";
 $fight->go();
 ?>
 
-
-<!--</div>-->
 </body>
 </html>

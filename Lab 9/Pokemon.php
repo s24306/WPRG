@@ -1,12 +1,7 @@
 <?php
 
 class Pokemon {
-    private $name;
-    private $type;
-    private $hp_max;
-    private $hp_current;
-    private $strength;
-    private $pathToPhoto;
+    private $name, $type, $hp_max, $hp_current, $strength, $pathToPhoto;
     private $confused = false;
     private $paralyzed = false;
 
