@@ -10,7 +10,7 @@ $date = date('Y-m-d');
 mysqli_begin_transaction($db_link);
 
 try {
-    mysqli_query($db_link, "INSERT IGNORE INTO transactions
+    mysqli_query($db_link, "INSERT INTO transactions
                                   (from_account_id,
                                   to_account_id,
                                   date_issued,
@@ -19,7 +19,7 @@ try {
                                   (".$fromAccount.",
                                    ".$toAccount.",
                                    CURDATE(),
-                                   ".$amountToTransfer." ");
+                                   ".$amountToTransfer.") ");
     mysqli_query($db_link, "UPDATE accounts
                                   SET balance=balance-".$amountToTransfer."
                                   WHERE account_id=".$fromAccount." ");
