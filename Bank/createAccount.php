@@ -27,8 +27,6 @@ $sql = "SELECT LAST_INSERT_ID()";
 
 if (!$lastID = mysqli_fetch_assoc(mysqli_query($db_link, $sql))) {
     echo "Error: ".$sql."<br>".mysqli_error($db_link);
-} else {
-    echo "Last id selected successfully<br>";
 }
 
 $queryData = $_SESSION['accountData'];

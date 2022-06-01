@@ -22,11 +22,14 @@ if (!$_SESSION['accounts'] = mysqli_fetch_assoc(mysqli_query($db_link, $sql))) {
     <div class="cust_profile_container">
             <div class="acc_details">
                 <span class="heading">Account Details</span><br>
-                <label>Customer Id : <?php echo $_SESSION['loggedCustomerId']; ?></label>
-<!-- <label>Account Number : <?php echo $_SESSION['Account_No']; ?></label> -->
-<label>Account Name : <?php echo $_SESSION['Name']; ?></label>
-<label>PESEL : <?php echo $_SESSION['PESEL']; ?></label>
-<!--<label>Available Balance : $<?php  ; ?></label>-->
+                <label>Customer Id : <?php echo $_SESSION['loggedCustomerId']; ?></label></br>
+                <label>Account Number : <?php echo $_SESSION['accountId']; ?></label></br>
+                <label>Account Name : <?php echo $_SESSION['Name']; ?></label></br>
+                <label>PESEL : <?php echo $_SESSION['PESEL']; ?></label></br>
+                <label>Available Balance : <?php echo $_SESSION['balance']; ?></label></br>
+</div>
+<div>
+    <a href="transferFunds.php">Transfer funds</a>
 </div>
 <div class="statement">
     <label class="heading">Bank Statement</label>
@@ -40,6 +43,7 @@ if (!$_SESSION['accounts'] = mysqli_fetch_assoc(mysqli_query($db_link, $sql))) {
         <?php
         $sql = "SELECT * from transactions 
                 WHERE from_account_id = ".$_SESSION['accountId']." 
+                OR to_account_id = ".$_SESSION['accountId']." 
                 ORDER By transaction_id DESC LIMIT 10";
         $transactions = mysqli_query($db_link, $sql);
         if ($transactions) {

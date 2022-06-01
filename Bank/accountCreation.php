@@ -37,7 +37,6 @@ include 'header.php';
         <div>
             <select name ="accountType" required >
                 <option class="default" value="" disabled selected>Account Type</option>
-                <option value="Saving">Saving</option>
                 <option value="Current">Current</option>
             </select>
         </div>
@@ -45,6 +44,10 @@ include 'header.php';
             <select name ="currency" required >
                 <option class="default" value="" disabled selected>Currency</option>
                 <option value="PLN">PLN</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="USD">USD</option>
+                <option value="JPY">JPY</option>
             </select>
         </div>
         <input type="submit" name="submit" value="Submit">
