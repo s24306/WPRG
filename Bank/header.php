@@ -1,5 +1,4 @@
 <?php
-session_start();
 ?>
 
 <!doctype html>
@@ -45,7 +44,7 @@ session_start();
 <body>
 <div>
     <a class="navBar" href="aboutUs.php">About Us </a>
-    <a class="navBar" href="ontactUs.php"> Contact Us</a>
+    <a class="navBar" href="contactUs.php"> Contact Us</a>
 </div><br>
 <div>
     <ul>
@@ -58,7 +57,6 @@ session_start();
         <?php }
         ?>
         <li style="float:right"><a href="accountCreation.php">Create an account</a></li>
-        <li style="float:right"><a href="loan.php">Take a loan</a></li>
     </ul>
 </div>
 <br>

@@ -12,6 +12,7 @@ if(isset($_POST['login']) && isset($_POST['password'])){
         echo "Error: ".$sql."<br>".mysqli_error($db_link);
     } else {
         echo "Login successful! Redirecting to the login page...";
+        $_SESSION['loggedIn'] = true;
         header("Location: account.php");
     }
 }

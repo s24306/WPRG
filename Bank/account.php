@@ -31,6 +31,9 @@ if (!$_SESSION['accounts'] = mysqli_fetch_assoc(mysqli_query($db_link, $sql))) {
 <div>
     <a href="transferFunds.php">Transfer funds</a>
 </div>
+<div>
+    <a href="loan.php">Take a loan</a>
+</div>
 <div class="statement">
     <label class="heading">Bank Statement</label>
     <table>
