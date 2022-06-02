@@ -13,7 +13,7 @@ $sql = "INSERT INTO customers (
         VALUES (
                 '$queryData[0]',
                 '$queryData[1]',
-                $queryData[2],
+                 $queryData[2],
                 '$queryData[3]',
                 '$queryData[4]')";
 

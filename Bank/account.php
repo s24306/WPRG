@@ -26,7 +26,7 @@ if (!$_SESSION['accounts'] = mysqli_fetch_assoc(mysqli_query($db_link, $sql))) {
                 <label>Account Number : <?php echo $_SESSION['accountId']; ?></label></br>
                 <label>Account Name : <?php echo $_SESSION['Name']; ?></label></br>
                 <label>PESEL : <?php echo $_SESSION['PESEL']; ?></label></br>
-                <label>Available Balance : <?php echo $_SESSION['balance']; ?></label></br>
+                <label>Available Balance : <?php echo number_format($_SESSION['balance'], 2)."".$_SESSION['currency']; ?></label></br>
 </div>
 <div>
     <a href="transferFunds.php">Transfer funds</a>
@@ -59,7 +59,7 @@ if (!$_SESSION['accounts'] = mysqli_fetch_assoc(mysqli_query($db_link, $sql))) {
 			<td>'.$row['transaction_id'].'</td>
 			<td>'.$row['from_account_id'].'</td>
 			<td>'.$row['to_account_id'].'</td>
-			<td>'.$row['amount'].'</td>
+			<td>'.number_format($row['amount'], 2).''.$row['currency'].'</td>
 			</tr>';
             }
 

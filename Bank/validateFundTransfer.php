@@ -26,5 +26,5 @@ if($_SESSION['isTransferValid'] == false){
 } else {
     $_SESSION['transferData'] = [$fromAccount, $toAccount, $amountToTransfer];
     include 'makeTransfer.php';
-    //header("Location: account.php");
+    header("Location: account.php");
 }

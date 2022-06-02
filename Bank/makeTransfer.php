@@ -5,7 +5,16 @@ include 'dbConnect.php';
 $fromAccount = $_SESSION['transferData'][0];
 $toAccount = $_SESSION['transferData'][1];
 $amountToTransfer = $_SESSION['transferData'][2];
-$date = date('Y-m-d');
+$exchangeRate = 1;
+
+$sql = "SELECT currency FROM accounts WHERE account_id=".$fromAccount." ";
+$fromCurrency = mysqli_fetch_assoc(mysqli_query($db_link, $sql))["currency"];
+$sql = "SELECT currency FROM accounts WHERE account_id=".$toAccount." ";
+$toCurrency = mysqli_fetch_assoc(mysqli_query($db_link, $sql))["currency"];
+if(strcmp($fromCurrency, $toCurrency)){
+    $sql = "SELECT rate FROM currency_exchange WHERE from_currency='".$fromCurrency."' AND to_currency='".$toCurrency."' ";
+    $exchangeRate = mysqli_fetch_assoc(mysqli_query($db_link, $sql))["rate"];
+}
 
 mysqli_begin_transaction($db_link);
 
@@ -14,17 +23,19 @@ try {
                                   (from_account_id,
                                   to_account_id,
                                   date_issued,
-                                  amount)
+                                  amount,
+                                  currency)
                                   VALUES
                                   (".$fromAccount.",
                                    ".$toAccount.",
                                    CURDATE(),
-                                   ".$amountToTransfer.") ");
+                                   ".$amountToTransfer.",
+                                   '".$fromCurrency."') ");
     mysqli_query($db_link, "UPDATE accounts
                                   SET balance=balance-".$amountToTransfer."
                                   WHERE account_id=".$fromAccount." ");
     mysqli_query($db_link, "UPDATE accounts
-                                  SET balance=balance+".$amountToTransfer."
+                                  SET balance=balance+".($amountToTransfer*$exchangeRate)."
                                   WHERE account_id=".$toAccount." ");
     mysqli_commit($db_link);
 } catch (mysqli_sql_exception $exception) {

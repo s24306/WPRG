@@ -11,8 +11,7 @@ if(isset($_POST['login']) && isset($_POST['password'])){
     if (!$_SESSION['accountData'] = mysqli_fetch_assoc(mysqli_query($db_link, $sql))) {
         echo "Error: ".$sql."<br>".mysqli_error($db_link);
     } else {
-        echo "Login successful! Redirecting to the account...";
-        $_SESSION['loggedIn'] = True;
+        echo "Login successful! Redirecting to the login page...";
         header("Location: account.php");
     }
 }
