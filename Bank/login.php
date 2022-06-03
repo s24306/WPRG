@@ -1,6 +1,10 @@
 <?php
 session_start();
-include 'header.php'
+include 'header.php';
+
+if(isset($_SESSION['InvalidLogin'])){
+    echo $_SESSION['InvalidLogin']."</br>";
+}
 ?>
     <form action="checkCredentials.php" method="post">
         <label for="login">Login: </label><br>

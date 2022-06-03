@@ -1,4 +1,6 @@
 <?php
+require "Account.php";
+require "Customer.php";
 session_start();
 
 $fromAccount = $_POST['fromAccount'];
@@ -8,7 +10,7 @@ $amountToTransfer = $_POST['amountToTransfer'];
 $_SESSION['isTransferValid'] = true;
 $_SESSION['wrongAmountMessage'] = "";
 
-if($fromAccount != $_SESSION['accountId']){
+if(!array_key_exists($fromAccount, $_SESSION['loggedCustomerData']->getAccounts())){
     $_SESSION['wrongAmountMessage'] .= "Nie kombinuj<br>";
     $_SESSION['isTransferValid'] = false;
 }

@@ -7,25 +7,29 @@ $toAccount = $_SESSION['transferData'][1];
 $amountToTransfer = $_SESSION['transferData'][2];
 $exchangeRate = 1;
 $recipientHasLoan = false;
+
 $sql = "SELECT left_to_pay, paid_down FROM loans WHERE customer_id IN (SELECT customer_id FROM accounts WHERE account_id=".$toAccount.")";
-if ($loanInfo = mysqli_fetch_assoc(mysqli_query($db_link, $sql))) {
+if ($loanInfo = $db_link->query($sql)->fetch_assoc()) {
     $loanAmount = $loanInfo["left_to_pay"];
     $recipientHasLoan = $loanInfo["paid_down"];
 }
 
 $sql = "SELECT currency FROM accounts WHERE account_id=".$fromAccount." ";
-$fromCurrency = mysqli_fetch_assoc(mysqli_query($db_link, $sql))["currency"];
+$fromCurrency = $db_link->query($sql)->fetch_assoc()["currency"];
 $sql = "SELECT currency FROM accounts WHERE account_id=".$toAccount." ";
-$toCurrency = mysqli_fetch_assoc(mysqli_query($db_link, $sql))["currency"];
+$toCurrency = $db_link->query($sql)->fetch_assoc()["currency"];
 if(strcmp($fromCurrency, $toCurrency)){
-    $sql = "SELECT rate FROM currency_exchange WHERE from_currency='".$fromCurrency."' AND to_currency='".$toCurrency."' ";
-    $exchangeRate = mysqli_fetch_assoc(mysqli_query($db_link, $sql))["rate"];
+    $sql = "SELECT rate 
+            FROM currency_exchange 
+            WHERE from_currency='".$fromCurrency."' 
+            AND to_currency='".$toCurrency."' ";
+    $exchangeRate = $db_link->query($sql)->fetch_assoc()["rate"];
 }
 
-mysqli_begin_transaction($db_link);
+$db_link->beginTransaction();
 
 try {
-    mysqli_query($db_link, "INSERT INTO transactions
+    $db_link->query("INSERT INTO transactions
                                   (from_account_id,
                                   to_account_id,
                                   date_issued,
@@ -37,36 +41,36 @@ try {
                                    CURDATE(),
                                    ".$amountToTransfer.",
                                    '".$fromCurrency."') ");
-    mysqli_query($db_link, "UPDATE accounts
+    $db_link->query( "UPDATE accounts
                                   SET balance=balance-".$amountToTransfer."
                                   WHERE account_id=".$fromAccount." ");
     if($recipientHasLoan){
         if($loanAmount < $amountToTransfer*0.1*$exchangeRate){
             $afterPayingDownTheLoan = $amountToTransfer*$exchangeRate - $loanAmount;
-            mysqli_query($db_link, "UPDATE accounts
+            $db_link->query( "UPDATE accounts
                                   SET balance=balance+".$afterPayingDownTheLoan."
                                   WHERE account_id=".$toAccount." ");
-            mysqli_query($db_link, "UPDATE loans
+            $db_link->query( "UPDATE loans
                                   SET left_to_pay=0
                                   WHERE customer_id IN 
                                   (SELECT customer_id FROM accounts WHERE account_id=".$toAccount.") ");
         } else {
-            mysqli_query($db_link, "UPDATE accounts
+            $db_link->query( "UPDATE accounts
                                   SET balance=balance+".($amountToTransfer*0.9*$exchangeRate)."
                                   WHERE account_id=".$toAccount." ");
-            mysqli_query($db_link, "UPDATE loans
+            $db_link->query( "UPDATE loans
                                   SET left_to_pay=left_to_pay-".($amountToTransfer*0.1*$exchangeRate)."
                                   WHERE customer_id IN 
                                   (SELECT customer_id FROM accounts WHERE account_id=".$toAccount.") ");
         }
     } else {
-        mysqli_query($db_link, "UPDATE accounts
+        $db_link->query( "UPDATE accounts
                                   SET balance=balance+".($amountToTransfer*$exchangeRate)."
                                   WHERE account_id=".$toAccount." ");
     }
-    mysqli_commit($db_link);
+    $db_link->commit();
 } catch (mysqli_sql_exception $exception) {
-    mysqli_rollback($db_link);
+    $db_link->rollback();
     throw $exception;
 }
 

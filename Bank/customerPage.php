@@ -1,9 +1,9 @@
 <?php
+include 'Customer.php';
+include 'Account.php';
 session_start();
 include 'header.php';
 include 'dbConnect.php';
-include 'Customer.php';
-include 'Account.php';
 
 $_SESSION['loggedCustomerData'] = new Customer($_SESSION['customerData']["customer_id"],
     $_SESSION['customerData']["first_name"],

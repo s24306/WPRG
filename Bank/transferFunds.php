@@ -1,6 +1,9 @@
 <?php
+require "Account.php";
+require "Customer.php";
 session_start();
 include 'header.php';
+
 ?>
 
     <!doctype html>
@@ -13,21 +16,25 @@ include 'header.php';
         <title>Transfer funds</title>
     </head>
     <body>
-    <a style="color: red"><?php
+    <p style="color: red"><?php
         if(isset($_SESSION['isTransferValid']) && !$_SESSION['isTransferValid']){
             echo $_SESSION['wrongAmountMessage'];
-        }
-        ?></a>
+        }?></p>
     <form method="post" action="validateFundTransfer.php">
         <div>
-            <select name ="fromAccount" required >
+            <select name="fromAccount" required>
                 <option class="default" value="" disabled selected>From Account</option>
-                <option value="<?php echo $_SESSION['accountId']; ?>"><?php echo $_SESSION['accountId']; ?></option>
+                <?php
+                foreach($_SESSION['loggedCustomerData']->getAccounts() as $acc){?>
+                    <option value="<?php echo $acc->getAccountId(); ?>"><?php echo $acc->getAccountId().": ".
+                            number_format($acc->getBalance(), 2).$acc->getCurrency(); ?></option>
+                <?php }
+                ?>
             </select></br>
         </div>
         <div>
             <label for="toAccount">To Account</label>
-            <input id="toAccount" type="number" name="toAccount" value="<?php echo $_SESSION['accountId']; ?>" required>
+            <input id="toAccount" type="number" name="toAccount" required>
             </br>
         </div>
         <div>
