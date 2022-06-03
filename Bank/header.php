@@ -53,10 +53,10 @@
         if(!isset($_SESSION['loggedIn'])){?>
             <li style="float:right"><a href="login.php">Login</a></li>
         <?php }else{?>
-            <li style="float:right"><a href="account.php">My account</a></li>
+            <li style="float:right"><a href="customerPage.php">My account</a></li>
         <?php }
         ?>
-        <li style="float:right"><a href="accountCreation.php">Create an account</a></li>
+        <li style="float:right"><a href="customerCreation.php">Create an account</a></li>
     </ul>
 </div>
 <br>

@@ -18,7 +18,7 @@ include 'header.php';
             echo $_SESSION['wrongValidationMessage'];
         }
         ?></a>
-    <form method="post" action="validateAccountCreationData.php">
+    <form method="post" action="validateCustomerCreationData.php">
         <div>
             <label for="name">Name</label><br>
             <input type="text" id="name" name="name" placeholder="Paweł" required><br>
@@ -33,12 +33,6 @@ include 'header.php';
         </div>
         <div>
             <input type="text" name="dob" placeholder="Date of Birth" onfocus="(this.type='date')" required />
-        </div>
-        <div>
-            <select name ="accountType" required >
-                <option class="default" value="" disabled selected>Account Type</option>
-                <option value="Current">Current</option>
-            </select>
         </div>
         <div>
             <select name ="currency" required >

@@ -7,9 +7,10 @@ $toAccount = $_SESSION['transferData'][1];
 $amountToTransfer = $_SESSION['transferData'][2];
 $exchangeRate = 1;
 $recipientHasLoan = false;
-$sql = "SELECT left_to_pay FROM loans WHERE customer_id IN (SELECT customer_id FROM accounts WHERE account_id=".$toAccount.")";
-if ($loanAmount = mysqli_fetch_assoc(mysqli_query($db_link, $sql))["left_to_pay"]) {
-    $recipientHasLoan = true;
+$sql = "SELECT left_to_pay, paid_down FROM loans WHERE customer_id IN (SELECT customer_id FROM accounts WHERE account_id=".$toAccount.")";
+if ($loanInfo = mysqli_fetch_assoc(mysqli_query($db_link, $sql))) {
+    $loanAmount = $loanInfo["left_to_pay"];
+    $recipientHasLoan = $loanInfo["paid_down"];
 }
 
 $sql = "SELECT currency FROM accounts WHERE account_id=".$fromAccount." ";

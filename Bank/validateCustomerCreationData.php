@@ -5,7 +5,7 @@ $name = $_POST['name'];
 $surname = $_POST['surname'];
 $pesel = $_POST['pesel'];
 $dob = $_POST['dob'];
-$accountType = $_POST['accountType'];
+$accountType = "Current";
 $currency = $_POST['currency'];
 $customerPassword = date('Y', strtotime($dob)).date('m', strtotime($dob)).date('d', strtotime($dob));
 
@@ -33,10 +33,10 @@ if( !(1918 < date('Y', strtotime($dob))) || !(date('Y', strtotime($dob))< 2020))
 }
 
 if($_SESSION['isDataValid'] == false){
-    header("Location: accountCreation.php");
+    header("Location: customerCreation.php");
 } else {
     $_SESSION['customerData'] = [$name, $surname, $pesel, $dob, $customerPassword];
     $_SESSION['accountData'] = [$accountType, $currency];
-    include 'createAccount.php';
-    header("Location: account.php");
+    include 'createCustomer.php';
+    header("Location: login.php");
 }

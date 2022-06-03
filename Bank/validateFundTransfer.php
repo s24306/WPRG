@@ -13,7 +13,7 @@ if($fromAccount != $_SESSION['accountId']){
     $_SESSION['isTransferValid'] = false;
 }
 if(!ctype_digit($toAccount)){
-    $_SESSION['wrongAmountMessage'] .= "Account does not exists<br>";
+    $_SESSION['wrongAmountMessage'] .= "Customer does not exists<br>";
     $_SESSION['isTransferValid'] = false;
 }
 if(!ctype_digit($amountToTransfer)){
@@ -26,5 +26,5 @@ if($_SESSION['isTransferValid'] == false){
 } else {
     $_SESSION['transferData'] = [$fromAccount, $toAccount, $amountToTransfer];
     include 'makeTransfer.php';
-    header("Location: account.php");
+    header("Location: customerPage.php");
 }

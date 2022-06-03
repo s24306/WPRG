@@ -37,5 +37,5 @@ try {
     throw $exception;
 }
 
-header("Location: account.php");
+header("Location: customerPage.php");
 ?>
