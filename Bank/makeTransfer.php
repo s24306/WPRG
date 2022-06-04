@@ -26,7 +26,7 @@ if(strcmp($fromCurrency, $toCurrency)){
     $exchangeRate = $db_link->query($sql)->fetch_assoc()["rate"];
 }
 
-$db_link->beginTransaction();
+$db_link->autocommit(FALSE);
 
 try {
     $db_link->query("INSERT INTO transactions
@@ -73,6 +73,7 @@ try {
     $db_link->rollback();
     throw $exception;
 }
+$db_link->autocommit(TRUE);
 
 include 'dbDisconnect.php';
 
