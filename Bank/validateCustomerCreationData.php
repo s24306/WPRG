@@ -3,6 +3,7 @@ session_start();
 
 $name = $_POST['name'];
 $surname = $_POST['surname'];
+$nameSurnameExp = "/^.*$/";
 $pesel = $_POST['pesel'];
 $dob = $_POST['dob'];
 $accountType = "Current";
@@ -12,14 +13,14 @@ $customerPassword = date('Y', strtotime($dob)).date('m', strtotime($dob)).date('
 $_SESSION['isDataValid'] = true;
 $_SESSION['wrongValidationMessage'] = "";
 
-if(!ctype_alpha($name)){
+if(!ctype_alpha($name) || !preg_match($nameSurnameExp, $name)){
     $_SESSION['wrongValidationMessage'] .= "Name must contain only alpha characters 
-    - no numbers or special characters allowed<br>";
+    - no numbers, spaces or special characters allowed<br>";
     $_SESSION['isDataValid'] = false;
 }
-if(!ctype_alpha($surname)){
+if(!ctype_alpha($surname) || !preg_match($nameSurnameExp, $surname)){
     $_SESSION['wrongValidationMessage'] .= "Surname must contain only alpha characters 
-    - no numbers or special characters allowed<br>";
+    - no numbers, spaces or special characters allowed<br>";
     $_SESSION['isDataValid'] = false;
 }
 if(!ctype_digit($pesel) || !(10 < strlen($pesel)) || !(strlen($pesel) < 12)){

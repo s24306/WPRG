@@ -3,6 +3,9 @@ require "Account.php";
 require "Customer.php";
 session_start();
 include 'header.php';
+include 'functions.php';
+
+redirectIfCustomerNotLogged();
 
 ?>
 
@@ -40,6 +43,10 @@ include 'header.php';
         <div>
             <label for="amountToTransfer">Amount to transfer</label>
             <input id="amountToTransfer" type="number" name="amountToTransfer" value="0" required></br>
+        </div>
+        <div>
+            <label for="confirmation">Generate confirmation of payment</label>
+            <input type="checkbox" name="confirmation" id="confirmation">
         </div>
         <input type="submit" name="submit" value="Submit">
     </form>

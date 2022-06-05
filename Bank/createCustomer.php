@@ -2,6 +2,10 @@
 session_start();
 include 'dbConnect.php';
 
+if(!isset($_SESSION['customerData'])){
+        header('Location: login.php');
+}
+
 $queryData = $_SESSION['customerData'];
 
 $sql = "INSERT INTO customers (

@@ -4,11 +4,21 @@ include 'Account.php';
 session_start();
 include 'header.php';
 include 'dbConnect.php';
+include 'functions.php';
 
-$_SESSION['loggedCustomerData'] = new Customer($_SESSION['customerData']["customer_id"],
-    $_SESSION['customerData']["first_name"],
-    $_SESSION['customerData']["last_name"],
-    $_SESSION['customerData']["PESEL"]);
+if(isset($_COOKIE["loggedIn"])) {
+    $_SESSION['loggedCustomerData'] = new Customer($_COOKIE["loggedIn"]["customer_id"],
+        $_COOKIE["loggedIn"]["first_name"],
+        $_COOKIE["loggedIn"]["last_name"],
+        $_COOKIE["loggedIn"]["PESEL"]);
+} elseif (isset($_SESSION['customerData'])){
+    $_SESSION['loggedCustomerData'] = new Customer($_SESSION['customerData']["customer_id"],
+        $_SESSION['customerData']["first_name"],
+        $_SESSION['customerData']["last_name"],
+        $_SESSION['customerData']["PESEL"]);
+} else {
+    header('Location: login.php');
+}
 
 $sql = "SELECT * FROM accounts WHERE customer_id=".$_SESSION['loggedCustomerData']->getCustomerId()." ";
 if (!$accounts = $db_link->query($sql)) {

@@ -28,5 +28,8 @@ if($_SESSION['isTransferValid'] == false){
 } else {
     $_SESSION['transferData'] = [$fromAccount, $toAccount, $amountToTransfer];
     include 'makeTransfer.php';
+    if(isset($_POST['confirmation'])){
+        include 'generateConfirmationOfPayment.php';
+    }
     header("Location: customerPage.php");
 }

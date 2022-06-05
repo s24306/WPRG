@@ -2,6 +2,10 @@
 session_start();
 include 'dbConnect.php';
 
+if(!isset($_SESSION['transferData'])){
+    header('Location: index.php');
+}
+
 $fromAccount = $_SESSION['transferData'][0];
 $toAccount = $_SESSION['transferData'][1];
 $amountToTransfer = $_SESSION['transferData'][2];

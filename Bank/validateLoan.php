@@ -3,6 +3,10 @@ include 'Customer.php';
 include 'Account.php';
 session_start();
 include 'dbConnect.php';
+
+if(!isset($_POST["loanAmount"])){
+    header("Location: index.php");
+}
 $loanAmount = $_POST["loanAmount"];
 
 $sql = "SELECT * FROM loans WHERE customer_id=".$_SESSION['loggedCustomerData']->getCustomerId()." ";

@@ -2,6 +2,9 @@
 session_start();
 include 'header.php';
 
+if(isset($_COOKIE["loggedIn"])) {
+    header('Location: customerPage.php');
+}
 if(isset($_SESSION['InvalidLogin'])){
     echo $_SESSION['InvalidLogin']."</br>";
 }

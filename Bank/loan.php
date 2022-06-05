@@ -1,6 +1,10 @@
 <?php
 session_start();
 include 'header.php';
+include 'functions.php';
+
+redirectIfCustomerNotLogged();
+
 ?>
     <form method="post" action="validateLoan.php">
         <div>
