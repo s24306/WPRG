@@ -5,6 +5,10 @@ include 'functions.php';
 
 redirectIfCustomerNotLogged();
 
+if(isset($_SESSION["loanExists"])){
+    echo "<p style='color: red'>".$_SESSION["loanExists"]."</p>";
+    unset($_SESSION["loanExists"]);
+}
 ?>
     <form method="post" action="validateLoan.php">
         <div>

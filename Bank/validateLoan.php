@@ -9,8 +9,11 @@ if(!isset($_POST["loanAmount"])){
 }
 $loanAmount = $_POST["loanAmount"];
 
+
 $sql = "SELECT * FROM loans WHERE customer_id=".$_SESSION['loggedCustomerData']->getCustomerId()." ";
-if ($_SESSION["loanExists"] = $db_link->query($sql)->fetch_assoc()) {
+if ($db_link->query($sql)->fetch_assoc()) {
+    $_SESSION["loanExists"] = "There already exists loan in your account.
+     You need to pay it first before applying for a new one.";
     header("Location: loan.php");
 }
 if ( !($loanAmount <= 3000) || !($loanAmount > 0)) {

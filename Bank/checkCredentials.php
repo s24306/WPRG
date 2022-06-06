@@ -5,7 +5,7 @@ include 'dbConnect.php';
 if(isset($_POST['login']) && isset($_POST['password'])){
     if(!ctype_digit($_POST['login'])){
         $_SESSION['InvalidLogin'] = "The password is incorrect or the account you're trying to access doesn't exist.";
-//        header("Location: http://szuflandia.pjwstk.edu.pl/~s24306/test/Bank/login.php");
+        header("Location: http://szuflandia.pjwstk.edu.pl/~s24306/test/Bank/login.php");
     }
     $sql = "SELECT * FROM customers
             WHERE
@@ -16,7 +16,7 @@ if(isset($_POST['login']) && isset($_POST['password'])){
         echo "Error: ".$sql."<br>".mysqli_error($db_link);
         include 'dbDisconnect.php';
         $_SESSION['InvalidLogin'] = "The password is incorrect or the account you're trying to access doesn't exist.";
-//        header("Location: http://szuflandia.pjwstk.edu.pl/~s24306/test/Bank/login.php");
+        header("Location: http://szuflandia.pjwstk.edu.pl/~s24306/test/Bank/login.php");
     } else {
         include 'dbDisconnect.php';
         echo "Login successful! Redirecting to the login page...";
