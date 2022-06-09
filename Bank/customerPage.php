@@ -6,16 +6,16 @@ include 'header.php';
 include 'dbConnect.php';
 include 'functions.php';
 
-if(isset($_COOKIE["loggedIn"])) {
-    $_SESSION['loggedCustomerData'] = new Customer($_COOKIE["loggedIn"]["customer_id"],
-        $_COOKIE["loggedIn"]["first_name"],
-        $_COOKIE["loggedIn"]["last_name"],
-        $_COOKIE["loggedIn"]["PESEL"]);
-} elseif (isset($_SESSION['customerData'])){
+if (isset($_SESSION['customerData'])){
     $_SESSION['loggedCustomerData'] = new Customer($_SESSION['customerData']["customer_id"],
         $_SESSION['customerData']["first_name"],
         $_SESSION['customerData']["last_name"],
         $_SESSION['customerData']["PESEL"]);
+} elseif(isset($_COOKIE["loggedIn"])) {
+    $_SESSION['loggedCustomerData'] = new Customer($_COOKIE["loggedIn"]["customer_id"],
+        $_COOKIE["loggedIn"]["first_name"],
+        $_COOKIE["loggedIn"]["last_name"],
+        $_COOKIE["loggedIn"]["PESEL"]);
 } else {
     header('Location: login.php');
 }
