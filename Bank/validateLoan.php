@@ -8,6 +8,7 @@ if(!isset($_POST["loanAmount"])){
     header("Location: index.php");
 }
 $loanAmount = $_POST["loanAmount"];
+$account = $_POST['account'];
 
 
 $sql = "SELECT * FROM loans WHERE customer_id=".$_SESSION['loggedCustomerData']->getCustomerId()." ";
@@ -15,10 +16,12 @@ if ($db_link->query($sql)->fetch_assoc()) {
     $_SESSION["loanExists"] = "There already exists loan in your account.
      You need to pay it first before applying for a new one.";
     header("Location: loan.php");
+    exit;
 }
 if ( !($loanAmount <= 3000) || !($loanAmount > 0)) {
     $_SESSION["invalidLoanAmount"] = true;
     header("Location: loan.php");
+    exit;
 }
 
 $db_link->autocommit(FALSE);
@@ -38,7 +41,7 @@ try {
                                    CURDATE()) ");
     $db_link->query( "UPDATE accounts
                                   SET balance=balance+".$loanAmount."
-                                  WHERE account_id=".$_SESSION['accountId']." ");
+                                  WHERE account_id=".$account." ");
     $db_link->commit();
 } catch (mysqli_sql_exception $exception) {
     $db_link->rollback();
@@ -46,5 +49,5 @@ try {
     throw $exception;
 }
 
-header("Location: customerPage.php");
+//header("Location: customerPage.php");
 ?>

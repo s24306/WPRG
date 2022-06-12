@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if(!isset($_POST['name'])){
+    header("Location: customerPage.php");
+}
+
 $name = $_POST['name'];
 $surname = $_POST['surname'];
 $nameSurnameExp = "/^.*$/";

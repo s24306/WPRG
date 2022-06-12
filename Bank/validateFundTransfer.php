@@ -3,6 +3,10 @@ require "Account.php";
 require "Customer.php";
 session_start();
 
+if(!isset($_POST['fromAccount'])){
+    header("Location: customerPage.php");
+}
+
 $fromAccount = $_POST['fromAccount'];
 $toAccount = $_POST['toAccount'];
 $amountToTransfer = $_POST['amountToTransfer'];
@@ -19,7 +23,11 @@ if(!ctype_digit($toAccount)){
     $_SESSION['isTransferValid'] = false;
 }
 if(!ctype_digit($amountToTransfer)){
-    $_SESSION['wrongAmountMessage'] .= "Sadly we can transfer only numbers :(<br>";
+    $_SESSION['wrongAmountMessage'] .= "Sadly we can transfer only numbers, and only more than 0 :(<br>";
+    $_SESSION['isTransferValid'] = false;
+}
+if($amountToTransfer > $_SESSION['loggedCustomerData']->getAccounts()[$fromAccount]->getBalance()){
+    $_SESSION['wrongAmountMessage'] .= "Not enough funds<br>";
     $_SESSION['isTransferValid'] = false;
 }
 

@@ -29,7 +29,6 @@ if (!$accounts = $db_link->query($sql)) {
         $_SESSION['loggedCustomerData']->addAccount($account);
     }
 }
-
 ?>
     <div class="cust_profile_container">
             <div class="acc_details">
@@ -43,6 +42,9 @@ if (!$accounts = $db_link->query($sql)) {
 </div>
 <div>
     <a href="loan.php">Take a loan</a>
+</div>
+<div>
+    <a href="openNewAccount.php">Open new account</a>
 </div>
 <div class="statement">
     <label class="heading">Bank Statement</label>
@@ -60,8 +62,8 @@ if (!$accounts = $db_link->query($sql)) {
             array_push($accountNumbers, $acc->getAccountId());
         }
         $sql = "SELECT * from transactions 
-                WHERE from_account_id IN (".join("','",$accountNumbers).") 
-                OR to_account_id IN (".join("','",$accountNumbers).") 
+                WHERE from_account_id IN (".join(",",$accountNumbers).") 
+                OR to_account_id IN (".join(",",$accountNumbers).") 
                 ORDER By transaction_id DESC LIMIT 10";
         $transactions = $db_link->query($sql);
         if ($transactions) {
