@@ -51,6 +51,7 @@ redirectIfCustomerNotLogged();
         <input type="submit" name="submit" value="Submit">
     </form>
     </body>
+    <a href='customerPage.php'>Go back</a>
     </html>
 
 <?php
