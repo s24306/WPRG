@@ -22,6 +22,7 @@ redirectIfCustomerNotLogged();
     <p style="color: red"><?php
         if(isset($_SESSION['isTransferValid']) && !$_SESSION['isTransferValid']){
             echo $_SESSION['wrongAmountMessage'];
+            unset($_SESSION['wrongAmountMessage']);
         }?></p>
     <form method="post" action="validateFundTransfer.php">
         <div>

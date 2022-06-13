@@ -2,6 +2,7 @@
 require "Account.php";
 require "Customer.php";
 session_start();
+include 'dbConnect.php';
 
 if(!isset($_POST['fromAccount'])){
     header("Location: customerPage.php");
@@ -18,7 +19,10 @@ if(!array_key_exists($fromAccount, $_SESSION['loggedCustomerData']->getAccounts(
     $_SESSION['wrongAmountMessage'] .= "Nie kombinuj<br>";
     $_SESSION['isTransferValid'] = false;
 }
-if(!ctype_digit($toAccount)){
+
+$sql = "SELECT EXISTS(SELECT account_id FROM accounts WHERE account_id=".$toAccount.") ";
+$result = $db_link->query($sql);
+if(!$result->fetch_assoc(1)){
     $_SESSION['wrongAmountMessage'] .= "Customer does not exists<br>";
     $_SESSION['isTransferValid'] = false;
 }
